@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+// Include User Model
+const User = require('./user')
+
 const recordSchema = new Schema({
   name: {
     type: String,
     required: true
   },
   date: {
-    type: Date,
+    type: String,
     required: true 
   }, 
   amount: {
@@ -20,6 +23,12 @@ const recordSchema = new Schema({
   },
   categoryId: {
     type: Number,
+    required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: User,
+    index: true,
     required: true
   }
 })
