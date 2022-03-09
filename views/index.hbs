@@ -1,1 +1,60 @@
-<h1>首頁</h1>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <!-- 快捷鍵 -->
+      <div class="container d-flex justify-content-between">
+        <!-- 類別 -->
+        <div class="dropdown col d-grid gap-2" style="max-width:fit-content;">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            支出類別
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="/">A->Z</a></li>
+            <li><a class="dropdown-item" href="/sorts/nameZtoA">Z->A</a></li>
+            <li><a class="dropdown-item" href="/sorts/category">Category</a></li>
+            <li><a class="dropdown-item" href="/sorts/location">Region</a></li>
+          </ul>
+        </div>
+        <!-- 新增按鈕 -->
+        <a href="/records/new" class="btn btn-outline-info">新增支出</a>
+      </div>
+      
+      <!--顯示花費金額-->
+      <div class="total-expenses d-flex justify-content-center align-items-center mt-3">
+        <h3 class="text-center mx-3 ">累計:</h3>
+        <h1 style="font-weight: bolder;color: #F2668B">金額</h1>
+      </div>
+      
+      <!-- 支出清單 -->
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row justify-content-between">
+            <!-- 支出類別、名稱和日期 -->
+            <div class="col-auto mr-auto d-flex justify-content-center align-items-center">
+              <i class="fa-solid fa-house fa-2xl mx-3"></i>
+              <div class="wrap d-flex flex-column mt-2">
+                <h4 class="mb-0" style="display: inline; vertical-align: middle;">晚餐</h4>
+                <span class="mt-0">2022-03-09</p>
+              </div>
+            </div>
+            
+            <!-- 編輯和刪除按鈕 -->
+            <div class="col-auto d-flex align-items-center">
+              <!-- 支出金額 -->
+              <div class="amount mx-5">
+                <h3>100</h3>
+              </div>
+              <a class="btn btn-success mx-2" href="/records/{{this._id}}/edit">Edit</a>
+              <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+</div>
