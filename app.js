@@ -1,5 +1,6 @@
 // Include Packages
 const express = require('express')
+const exphbs = require('express-handlebars')
 const port = 3000
 
 require('./config/mongoose')
@@ -7,9 +8,16 @@ require('./config/mongoose')
 const app = express()
 
 
+// setting template engine
+app.engine('hbs', exphbs.engine({
+  extname: 'hbs', defaultLayout:'main'
+}))
+app.set('view engine', 'hbs')
+
+
 // setting routes
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.render('index')
 })
 
 
