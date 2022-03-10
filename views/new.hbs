@@ -1,0 +1,33 @@
+<div class="container d-flex flex-column justify-content-center align-items-center mt-1">
+    <form action="/records" method="POST">
+      <h3 class="mb-0">新增一筆支出</h3>
+      <!--Record Name -->
+      <input type="text" placeholder="支出名稱" name="name">
+      
+      <!-- Record Date -->
+      <input type="date" name="date" class="mt-2" style="display: block;">
+      
+      <!-- Record Amount -->
+      <input type="number" name="amount" placeholder="請輸入金額" class="mt-2" style="display: block;">
+
+      <!-- Record Method -->
+      <input type="text" name="method" placeholder="請輸入付款方式" class="mt-2" style="display: block;">
+    
+      <!--Record Category -->
+      <div class="category mt-4" style="max-width: 240px;">
+        <input list="category" class="form-control mt-3" name="categoryName" id="categories" placeholder="請選擇支出類別">
+        <datalist id="category">
+          <option>家居物業</option>
+          <option>交通出行</option>
+          <option>休閒娛樂</option>
+          <option>餐飲食品</option>
+          <option>其他</option>
+        </datalist>
+      </div>
+    
+      <!-- Create Button -->
+      <div class="button text-center mt-2">
+        <button type="submit">新增</button>
+      </div>
+    </form>
+</div>

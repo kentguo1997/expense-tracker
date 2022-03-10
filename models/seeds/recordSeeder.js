@@ -73,12 +73,14 @@ db.once('open', () => {
         Category.findOne({ categoryName: writtenRecord.categoryName })
           .then(category => {
             const categoryId = category.categoryId
+            const categoryIcon = category.categoryIcon
             Record.create({
               name: writtenRecord.name,
               date: writtenRecord.date,
               amount: writtenRecord.amount,
               method: writtenRecord.method,
               categoryId,
+              categoryIcon,
               userId
             })
           })  

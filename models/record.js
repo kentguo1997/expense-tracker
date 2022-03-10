@@ -25,11 +25,15 @@ const recordSchema = new Schema({
     type: Number,
     required: true
   },
+  categoryIcon: {
+    type: String,
+    required: true
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: User,
     index: true,
-    required: true
+    // required: true
   }
 })
 

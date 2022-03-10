@@ -16,35 +16,38 @@
             <li><a class="dropdown-item" href="/sorts/location">Region</a></li>
           </ul>
         </div>
-        <!-- 新增按鈕 -->
-        <a href="/records/new" class="btn btn-outline-info">新增支出</a>
       </div>
       
       <!--顯示花費金額-->
       <div class="total-expenses d-flex justify-content-center align-items-center mt-3">
         <h3 class="text-center mx-3 ">累計:</h3>
-        <h1 style="font-weight: bolder;color: #F2668B">金額</h1>
+        <h1 style="font-weight: bolder;color: #F2668B">{{totalAmount}}</h1>
       </div>
       
+      {{#each records}}
       <!-- 支出清單 -->
       <ul class="list-group">
         <li class="list-group-item">
           <div class="row justify-content-between">
             <!-- 支出類別、名稱和日期 -->
             <div class="col-auto mr-auto d-flex justify-content-center align-items-center">
-              <i class="fa-solid fa-house fa-2xl mx-3"></i>
+              <i class="{{this.categoryIcon}} fa-2xl mx-3"></i>
               <div class="wrap d-flex flex-column mt-2">
-                <h4 class="mb-0" style="display: inline; vertical-align: middle;">晚餐</h4>
-                <span class="mt-0">2022-03-09</p>
+                <h4 class="mb-0" style="display: inline; vertical-align: middle;">{{this.name}}</h4>
+                <span class="mt-0">{{this.date}}</p>
               </div>
             </div>
             
-            <!-- 編輯和刪除按鈕 -->
+            
             <div class="col-auto d-flex align-items-center">
+              
               <!-- 支出金額 -->
               <div class="amount mx-5">
-                <h3>100</h3>
+                <h3>{{this.amount}}</h3>
               </div>
+
+              
+              <!-- 編輯和刪除按鈕 -->
               <a class="btn btn-success mx-2" href="/records/{{this._id}}/edit">Edit</a>
               <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;">
                 <button class="btn btn-danger" type="submit">Delete</button>
@@ -53,7 +56,12 @@
           </div>
         </li>
       </ul>
-
+      {{/each}}
+      
+      <!-- 新增按鈕 -->
+      <div class="total-expenses d-flex justify-content-center align-items-center mt-4">
+        <a href="/records/new" class="btn btn-outline-info btn-lg">新增支出</a>
+      </div>
 
     </div>
   </div>
