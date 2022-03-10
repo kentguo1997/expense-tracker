@@ -105,10 +105,21 @@ app.put('/records/:id', (req, res) => {
     record.method = method
     record.categoryId = categoryId
     record.categoryIcon = categoryIcon
-    
+
     record.save()
   })
   .then(() => res.redirect('/') )
+  .catch(err => console.log(err))
+})
+
+
+// Delete Record
+app.delete('/records/:id', (req, res) => {
+  const recordId = req.params.id
+
+  Record.findById(recordId)
+  .then(record => Record.deleteOne(record))
+  .then(() => res.redirect('/'))
   .catch(err => console.log(err))
 })
 
