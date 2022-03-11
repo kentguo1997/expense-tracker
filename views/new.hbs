@@ -1,33 +1,61 @@
-<div class="container d-flex flex-column justify-content-center align-items-center mt-1">
-    <form action="/records" method="POST">
-      <h3 class="mb-0">新增一筆支出</h3>
+<div class="container d-flex flex-column justify-content-center align-items-center mt-5 p-3" style="border: #3F7C85 8px double; max-width:900px;">
+    <form action="/records" method="POST" class="text-center">
+      <mark class="mt-4 mb-3 p-3 text-center" style="display: block; font-size: 40px; font-weight: bolder; border-radius: 100px;">新增一筆支出</mark>
+
       <!--Record Name -->
-      <input type="text" placeholder="支出名稱" name="name">
+      <span class="required mx-2" style="color: red;">*</span>
+      <input type="text" placeholder="請輸入支出名稱" class="mt-4 mb-2" name="name" size="50" style=" padding:5px 15px; background:#D8FFDB; border:0 none;cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
       
       <!-- Record Date -->
-      <input type="date" name="date" class="mt-2" style="display: block;">
+      <div class="d-flex align-items-center mt-3 mb-2">
+        <span class="required mx-2" style="color: red;">*</span>
+        <input type="date" name="date" size="50" style="display: block; padding:5px 15px; background:#D8FFDB; border:0 none;
+        cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+      </div>
+      
       
       <!-- Record Amount -->
-      <input type="number" name="amount" placeholder="請輸入金額" class="mt-2" style="display: block;">
-
-      <!-- Record Method -->
-      <input type="text" name="method" placeholder="請輸入付款方式" class="mt-2" style="display: block;">
-    
-      <!--Record Category -->
-      <div class="category mt-4" style="max-width: 240px;">
-        <input list="category" class="form-control mt-3" name="categoryName" id="categories" placeholder="請選擇支出類別">
-        <datalist id="category">
-          <option>家居物業</option>
-          <option>交通出行</option>
-          <option>休閒娛樂</option>
-          <option>餐飲食品</option>
-          <option>其他</option>
-        </datalist>
+      <div class="d-flex align-items-center mt-3 mb-2">
+        <span class="required mx-2" style="color: red;">*</span>
+        <input type="number" name="amount" placeholder="請輸入金額" class="mt-3 mb-2" size="50"
+          style="display: block; padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
       </div>
+      
+      <!-- Record Method -->
+      <div class="d-flex align-items-center mt-4 mb-2">
+        <span class="required mx-2" style="color: red;">*</span>
+        <div class="category" style="max-width: 240px;">
+          <input list="method" class="form-control" name="method" id="methods" placeholder="請選擇付款方式"
+            style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+          <datalist id="method">
+            <option>現金</option>
+            <option>信用卡</option>
+            <option>行動支付</option>
+          </datalist>
+        </div>
+      </div>
+      
+
+      <!--Record Category -->
+      <div class="d-flex align-items-center mt-4 mb-2">
+        <span class="required mx-2" style="color: red;">*</span>
+        <div class="category" style="max-width: 240px;">
+          <input list="category" class="form-control" name="categoryName" id="categories" placeholder="請選擇支出類別"
+            style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+          <datalist id="category">
+            <option>家居物業</option>
+            <option>交通出行</option>
+            <option>休閒娛樂</option>
+            <option>餐飲食品</option>
+            <option>其他</option>
+          </datalist>
+        </div>
+      </div>
+      
     
       <!-- Create Button -->
-      <div class="button text-center mt-2">
-        <button type="submit">新增</button>
+      <div class="button text-center mt-5 mb-3">
+        <button type="submit" class="btn btn-outline-success btn-lg">新增</button>
       </div>
     </form>
 </div>
