@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
   let totalAmount = 0
   Record.find()
     .lean()
+    .sort({ date: 'asc' })
     .then(records => {
       records.forEach(record => {
         totalAmount += record.amount
@@ -123,6 +124,127 @@ app.delete('/records/:id', (req, res) => {
   .catch(err => console.log(err))
 })
 
+
+// categories 
+app.get('/categories/living', (req, res) => {
+  let totalAmount = 0
+  Record.find({ categoryIcon: 'fa-solid fa-house'})
+  .lean()
+  .sort({date: 'asc'})
+  .then(records => {
+    records.forEach(record => {
+      totalAmount += record.amount
+    })
+    res.render('index', { records, totalAmount })
+  })
+  .catch(err => console.log(err))
+})
+
+
+app.get('/categories/transportation', (req, res) => {
+  let totalAmount = 0
+  Record.find({ categoryIcon: 'fa-solid fa-van-shuttle' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+app.get('/categories/entertainment', (req, res) => {
+  let totalAmount = 0
+  Record.find({ categoryIcon: 'fa-solid fa-face-grin-beam' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+app.get('/categories/food', (req, res) => {
+  let totalAmount = 0
+  Record.find({ categoryIcon: 'fa-solid fa-utensils' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+app.get('/categories/others', (req, res) => {
+  let totalAmount = 0
+  Record.find({ categoryIcon: 'fa-solid fa-pen' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+// methods
+app.get('/methods/cash', (req, res) => {
+  let totalAmount = 0
+  Record.find({ method: '現金' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+app.get('/methods/card', (req, res) => {
+  let totalAmount = 0
+  Record.find({ method: '信用卡' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
+
+
+app.get('/methods/mobile', (req, res) => {
+  let totalAmount = 0
+  Record.find({ method: '行動支付' })
+    .lean()
+    .sort({ date: 'asc' })
+    .then(records => {
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    })
+    .catch(err => console.log(err))
+})
 
 
 // Start and listen on the app 
