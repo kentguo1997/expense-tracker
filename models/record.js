@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
+const category = require('./category')
 const Schema = mongoose.Schema
 
 // Include User Model
+const Category = require('./category')
 const User = require('./user')
 
 const recordSchema = new Schema({
@@ -22,7 +24,9 @@ const recordSchema = new Schema({
     required: true
   },
   categoryId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: Category,
+    index: true,
     required: true
   },
   categoryIcon: {

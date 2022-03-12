@@ -72,7 +72,7 @@ db.once('open', () => {
       seedUser.writtenRecords.forEach(writtenRecord => {
         Category.findOne({ categoryName: writtenRecord.categoryName })
           .then(category => {
-            const categoryId = category.categoryId
+            const categoryId = category._id
             const categoryIcon = category.categoryIcon
             Record.create({
               name: writtenRecord.name,

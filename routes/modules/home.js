@@ -4,6 +4,7 @@ const router = express.Router()
 
 // Include Models
 const Record = require('../../models/record')
+const Category = require('../../models/category')
 
 // setting ('/' HomePage)
 router.get('/', (req, res) => {
@@ -12,10 +13,10 @@ router.get('/', (req, res) => {
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+      .lean()
+      .then(categories => res.render('index', { records, totalAmount, categories }))
     })
     .catch(error => console.log(error))
 })

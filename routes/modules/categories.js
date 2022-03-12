@@ -5,79 +5,38 @@ const router = express.Router()
 
 // Include Models
 const Record = require('../../models/record')
+const Category = require('../../models/category')
 
 
 // setting ('/categories')
-router.get('/living', (req, res) => {
-  let totalAmount = 0
-  Record.find({ categoryIcon: 'fa-solid fa-house' })
-    .lean()
-    .sort({ date: 'asc' })
-    .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
-    })
-    .catch(err => console.log(err))
+router.get('/new', (req, res) => {
+  res.render('newCategory')
 })
 
-
-router.get('/transportation', (req, res) => {
-  let totalAmount = 0
-  Record.find({ categoryIcon: 'fa-solid fa-van-shuttle' })
-    .lean()
-    .sort({ date: 'asc' })
-    .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
-    })
-    .catch(err => console.log(err))
+router.post('/', (req, res ) => {
+  const { categoryIcon, categoryName } = req.body
+  
+  Category.create({
+    categoryName,
+    categoryIcon
+  })
+  .then(() => res.redirect('/'))
+  .catch(err => console.log(err))
+  
 })
 
-
-router.get('/entertainment', (req, res) => {
+router.get('/:id', (req, res) => {
   let totalAmount = 0
-  Record.find({ categoryIcon: 'fa-solid fa-face-grin-beam' })
+  const categoryId = req.params.id
+   
+  Record.find({ categoryId })
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
-    })
-    .catch(err => console.log(err))
-})
-
-
-router.get('/food', (req, res) => {
-  let totalAmount = 0
-  Record.find({ categoryIcon: 'fa-solid fa-utensils' })
-    .lean()
-    .sort({ date: 'asc' })
-    .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
-    })
-    .catch(err => console.log(err))
-})
-
-
-router.get('/others', (req, res) => {
-  let totalAmount = 0
-  Record.find({ categoryIcon: 'fa-solid fa-pen' })
-    .lean()
-    .sort({ date: 'asc' })
-    .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+      .lean()
+      .then(categories => res.render('index', { records, totalAmount, categories }))
     })
     .catch(err => console.log(err))
 })

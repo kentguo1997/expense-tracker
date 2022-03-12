@@ -5,7 +5,6 @@ const db = require('../../config/mongoose')
 const Category = require('../category')
 
 // define category seed data
-let categoryId = Math.floor(Math.random()*100) + 1
 const categories = [
   { 
     name: '家居物業',
@@ -32,9 +31,7 @@ const categories = [
 
 db.once('open', () => {
   Promise.all(Array.from(categories, category => {
-    categoryId = categoryId + 1
     return Category.create({
-      categoryId,
       categoryName: category.name,
       categoryIcon: category.icon
     })

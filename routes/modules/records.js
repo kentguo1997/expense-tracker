@@ -10,14 +10,19 @@ const Category = require('../../models/category')
 // setting ('/records')
 // Adding new record
 router.get('/new', (req, res) => {
-  res.render('new')
+  Category.find()
+  .lean()
+  .then(categories => res.render('new', { categories }) )
+  .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
   const { name, date, amount, method, categoryName } = req.body
   Category.findOne({ categoryName })
     .then(category => {
-      const { categoryIcon, categoryId } = category
+      const categoryIcon = category.categoryIcon
+      const categoryId = category._id
+
       Record.create({
         name,
         date,
@@ -40,7 +45,7 @@ router.get('/:id/edit', (req, res) => {
     .lean()
     .then(record => {
       const { name, date, amount, method, categoryId } = record
-      Category.findOne({ categoryId })
+      Category.findOne({ _id: categoryId })
         .then(category => {
           const categoryName = category.categoryName
           res.render('edit', { name, date, amount, method, categoryName, recordId })
@@ -57,7 +62,7 @@ router.put('/:id', (req, res) => {
 
   Category.findOne({ categoryName })
     .then(category => {
-      categoryId = category.categoryId
+      categoryId = category._id
       categoryIcon = category.categoryIcon
     })
     .catch(err => console.log(err))

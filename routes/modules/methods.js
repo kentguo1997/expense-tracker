@@ -5,6 +5,7 @@ const router = express.Router()
 
 // Include Models
 const Record = require('../../models/record')
+const Category = require('../../models/category')
 
 
 // setting ('/methods')
@@ -14,10 +15,10 @@ router.get('/cash', (req, res) => {
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+      .lean()
+      .then(categories => res.render('index', { records, totalAmount, categories }))
     })
     .catch(err => console.log(err))
 })
@@ -29,10 +30,10 @@ router.get('/card', (req, res) => {
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+      .lean()
+      .then(categories => res.render('index', { records, totalAmount, categories }))
     })
     .catch(err => console.log(err))
 })
@@ -44,10 +45,10 @@ router.get('/mobile', (req, res) => {
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
-      res.render('index', { records, totalAmount })
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+      .lean()
+      .then(categories => res.render('index', { records, totalAmount, categories }))
     })
     .catch(err => console.log(err))
 })

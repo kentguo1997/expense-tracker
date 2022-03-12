@@ -1,0 +1,51 @@
+<div class="container d-flex flex-column justify-content-center align-items-center mt-5 p-3"
+  style="border: #3F7C85 8px double; max-width:900px;">
+  <form action="/categories" method="POST">
+    <mark class="mt-4 mb-3 p-3 text-center"
+      style="display: block; font-size: 40px; font-weight: bolder; border-radius: 100px;">新增支出類別</mark>
+
+    <!--Category Name -->
+    <div class="wrap">
+      <span class="required mx-2" style="color: red;">*</span>
+      <input type="text" placeholder="請輸入支出類別" class="mt-4 mb-2" name="categoryName" size="50"
+        style=" padding:5px 15px; background:#D8FFDB; border:0 none;cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+    </div>
+    
+    
+    <!-- Category Icon -->
+    <div class="d-flex justify-content-start align-items-center mt-4 mb-2" >
+      <span class="required mx-2" style="color: red;">*</span>
+      <div class="wrap" style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+          <span>選擇類別圖示:</span>
+          <div class="wrap">
+            <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-shirt" checked><i
+                class="fa-solid fa-shirt fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-book"><i
+                class="fa-solid fa-book fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-briefcase-medical"><i
+                class="fa-solid fa-briefcase-medical fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-plane"><i
+                class="fa-solid fa-plane fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-bag-shopping"><i
+                class="fa-solid fa-bag-shopping fa-lg mx-1"></i></label><br>
+            <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-piggy-bank"><i
+                class="fa-solid fa-piggy-bank fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-laptop"><i
+                class="fa-solid fa-laptop fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-child"><i
+                class="fa-solid fa-child fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-person-biking"><i
+                class="fa-solid fa-person-biking fa-lg mx-1"></i></label>
+            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-gift"><i
+                class="fa-solid fa-gift fa-lg mx-1"></i></label>
+          </div>  
+      </div>
+    </div>
+
+
+    <!-- Create Button -->
+    <div class="button text-center mt-5 mb-3">
+      <button type="submit" class="btn btn-outline-success btn-lg">新增</button>
+    </div>
+  </form>
+</div>

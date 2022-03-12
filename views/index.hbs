@@ -3,22 +3,24 @@
     <div class="card card-body">
       <!-- 快捷鍵 -->
       <div class="container d-flex justify-content-between">
-        <!-- 類別 -->
+        <!-- 類別 / 方式篩選  -->
         <div class="dropdown col d-grid gap-2" style="max-width:fit-content;">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
             支出類別/方式
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="/categories/living">家居物業</a></li>
-            <li><a class="dropdown-item" href="/categories/transportation">交通出行</a></li>
-            <li><a class="dropdown-item" href="/categories/entertainment">休閒娛樂</a></li>
-            <li><a class="dropdown-item" href="/categories/food">餐飲食品</a></li>
-            <li><a class="dropdown-item" href="/categories/others">其他類別</a></li>
+            {{#each categories}}
+            <li><a class="dropdown-item" href="/categories/{{this._id}}">{{this.categoryName}}</a></li>
+            {{/each}}
             <li><a class="dropdown-item" href="/methods/cash">現金支付</a></li>
             <li><a class="dropdown-item" href="/methods/card">信用卡支付</a></li>
             <li><a class="dropdown-item" href="/methods/mobile">行動支付</a></li>
           </ul>
+        </div>
+        <!-- 新增類別 -->
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="/categories/new" class="btn btn-dark">新增類別</a>
         </div>
       </div>
       
@@ -61,7 +63,7 @@
       {{/each}}
       
       <!-- 新增按鈕 -->
-      <div class="total-expenses d-flex justify-content-center align-items-center mt-4">
+      <div class="d-flex justify-content-center align-items-center mt-4">
         <a href="/records/new" class="btn btn-outline-info btn-lg">新增支出</a>
       </div>
 
