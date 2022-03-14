@@ -33,7 +33,7 @@ const records = [
     name: '晚餐',
     date: '2022-03-08',
     amount: 300,
-    method: '信用卡',
+    method: '行動支付',
     categoryName: '餐飲食品'
   },
   {
