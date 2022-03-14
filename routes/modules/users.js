@@ -2,6 +2,8 @@
 const express = require('express')
 const router = express.Router()
 
+// Include User Model
+const User = require('../../models/user')
 
 // setting('/users')
 router.get('/login', (req, res) => {
@@ -17,7 +19,24 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  res.send('Register')
+  const { name, email, password, confirmPassword } = req.body
+  
+  User.findOne({ email })
+  .then(user => {
+    if(!user) {
+      User.create({
+        name,
+        email,
+        password
+      })
+      .then(() => res.redirect('/users/login'))
+      .catch(err => console.log(err))
+    } else {
+      console.log('此信箱已經被註冊過了！')
+      res.render('register', { name, email, password, confirmPassword })
+    }
+  })
+  .catch(err => console.log(err))
 })
 
 // export router for index.js
