@@ -8,13 +8,16 @@ const Category = require('../../models/category')
 
 // setting ('/' HomePage)
 router.get('/', (req, res) => {
+  const userId = req.user._id
   let totalAmount = 0
-  Record.find()
+
+
+  Record.find({ userId })
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
       records.forEach(record => totalAmount += record.amount)
-      Category.find()
+      Category.find({ userId })
       .lean()
       .then(categories => res.render('index', { records, totalAmount, categories }))
     })

@@ -15,10 +15,12 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res ) => {
   const { categoryIcon, categoryName } = req.body
-  
+  const userId = req.user._id
+
   Category.create({
     categoryName,
-    categoryIcon
+    categoryIcon,
+    userId
   })
   .then(() => res.redirect('/'))
   .catch(err => console.log(err))
@@ -26,15 +28,16 @@ router.post('/', (req, res ) => {
 })
 
 router.get('/:id', (req, res) => {
-  let totalAmount = 0
   const categoryId = req.params.id
+  const userId = req.user._id
+  let totalAmount = 0
    
-  Record.find({ categoryId })
+  Record.find({ categoryId, userId })
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
       records.forEach(record => totalAmount += record.amount)
-      Category.find()
+      Category.find({ userId })
       .lean()
       .then(categories => res.render('index', { records, totalAmount, categories }))
     })
