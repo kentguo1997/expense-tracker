@@ -14,8 +14,14 @@
   <main>
     <nav class="navbar navbar-info bg-info">
       <div class="container-fluid d-flex justify-content-between">
-        <a class="navbar-brand" href="/" style="color: #024554; font-weight: bolder">記帳本</a>
-        <a href="/users/login" class="btn btn-success">Login</a>
+        
+        <a class="navbar-brand" href="/" style="color: #024554; font-weight: bolder">{{#if isAuthenticated}} {{user.name}}的{{/if}}記帳本</a>
+        
+        {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn btn-outline-secondary">Logout</a>
+        {{else}}
+        <a href="/users/login" class="btn btn-outline-light">Login</a>
+        {{/if}}
       </div>
     </nav>
   </main>
