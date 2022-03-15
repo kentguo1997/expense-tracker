@@ -24,6 +24,15 @@ router.post('/', (req, res) => {
 
   Category.findOne({ categoryName, userId })
     .then(category => {
+      if (!name || !date || !amount || !method || !categoryName) {
+        req.flash('blankErr', '請完成填寫表格！')
+        return res.redirect('/records/new')
+      }
+
+      if (!category) {
+        req.flash('addNewRecordErr', '您尚未新增此支出類別！請先新增類別！')
+        return res.redirect('/records/new')
+      }
       const categoryIcon = category.categoryIcon
       const categoryId = category._id
 
@@ -36,9 +45,9 @@ router.post('/', (req, res) => {
         categoryIcon,
         userId
       })
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err))
     })
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
 })
 
 

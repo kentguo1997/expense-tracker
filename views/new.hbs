@@ -1,15 +1,15 @@
 <div class="container d-flex flex-column justify-content-center align-items-center mt-5 p-3" style="border: #3F7C85 8px double; max-width:900px;">
     <form action="/records" method="POST" class="text-center">
       <mark class="mt-4 mb-3 p-3 text-center" style="display: block; font-size: 40px; font-weight: bolder; border-radius: 100px;">新增一筆支出</mark>
-
+      {{> message}}
       <!--Record Name -->
       <span class="required mx-2" style="color: red;">*</span>
-      <input type="text" placeholder="請輸入支出名稱" class="mt-4 mb-2" name="name" size="50" style=" padding:5px 15px; background:#D8FFDB; border:0 none;cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
+      <input type="text" placeholder="請輸入支出名稱" value="{{name}}" class="mt-4 mb-2" name="name" size="50" style=" padding:5px 15px; background:#D8FFDB; border:0 none;cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
       
       <!-- Record Date -->
       <div class="d-flex align-items-center mt-3 mb-2">
         <span class="required mx-2" style="color: red;">*</span>
-        <input type="date" name="date" size="50" style="display: block; padding:5px 15px; background:#D8FFDB; border:0 none;
+        <input type="date" name="date" value="{{date}}" size="50" style="display: block; padding:5px 15px; background:#D8FFDB; border:0 none;
         cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
       </div>
       
@@ -17,7 +17,7 @@
       <!-- Record Amount -->
       <div class="d-flex align-items-center mt-3 mb-2">
         <span class="required mx-2" style="color: red;">*</span>
-        <input type="number" name="amount" placeholder="請輸入金額" class="mt-3 mb-2" size="50"
+        <input type="number" name="amount" value="{{amount}}" placeholder="請輸入金額" class="mt-3 mb-2" size="50"
           style="display: block; padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
       </div>
       
@@ -25,7 +25,7 @@
       <div class="d-flex align-items-center mt-4 mb-2">
         <span class="required mx-2" style="color: red;">*</span>
         <div class="category" style="max-width: 240px;">
-          <input list="method" class="form-control" name="method" id="methods" placeholder="請選擇付款方式"
+          <input list="method" class="form-control" name="method" id="methods" value="{{method}}" placeholder="請選擇付款方式"
             style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
           <datalist id="method">
             <option>現金</option>
@@ -40,7 +40,7 @@
       <div class="d-flex align-items-center mt-4 mb-2">
         <span class="required mx-2" style="color: red;">*</span>
         <div class="category" style="max-width: 240px;">
-          <input list="category" class="form-control" name="categoryName" id="categories" placeholder="請選擇支出類別"
+          <input list="category" class="form-control" name="categoryName" value="{{categoryName}}" id="categories" placeholder="請選擇支出類別"
             style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
           <datalist id="category">
             {{#each categories}}
@@ -48,6 +48,7 @@
             {{/each}}
           </datalist>
         </div>
+        <a href="/categories/new" class="btn btn-outline-success btn-sm mx-2">新增類別</a>
       </div>
       
     

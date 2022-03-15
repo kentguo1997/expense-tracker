@@ -1,0 +1,50 @@
+{{#if success_msg}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{success_msg}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if warning_msg}}
+<div class="alert alert-secondary alert-dismissible fade show" role="alert">
+  <strong>{{warning_msg}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if errorMessages}}
+  {{#each errorMessages}}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{this.message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {{/each}}
+{{/if}}
+
+{{#if successRegister}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{successRegister}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if loginError}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>{{loginError}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if addNewRecordErr}}
+<div class="alert alert-secondary alert-dismissible fade show" role="alert">
+  <strong>{{addNewRecordErr}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if blankErr}}
+<div class="alert alert-secondary alert-dismissible fade show" role="alert">
+  <strong>{{blankErr}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}

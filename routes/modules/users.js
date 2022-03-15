@@ -15,7 +15,8 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true
 }))
 
 router.get('/register', (req, res) => {
@@ -24,7 +25,26 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  const errorMessages = []
   
+  if (!name || !email || !password || !confirmPassword) {
+    errorMessages.push({ message: '請完成填寫上方表格！'})
+  }
+  
+  if (password !== confirmPassword) {
+    errorMessages.push({ message: '密碼與確認密碼的欄位並不一致！'})
+  }
+
+  if (errorMessages.length) {
+    return res.render('register', {
+      name,
+      email,
+      password,
+      confirmPassword,
+      errorMessages
+    })
+  }
+
   User.findOne({ email })
   .then(user => {
     if(!user) {
@@ -33,11 +53,14 @@ router.post('/register', (req, res) => {
         email,
         password
       })
-      .then(() => res.redirect('/users/login'))
+      .then(() => {
+        req.flash('successRegister', '註冊成功! 請登入!')
+        res.redirect('/users/login')
+      })
       .catch(err => console.log(err))
     } else {
-      console.log('此信箱已經被註冊過了！')
-      res.render('register', { name, email, password, confirmPassword })
+      errorMessages.push({ message: '此信箱已經註冊過了！' })
+      res.render('register', { name, email, password, confirmPassword, errorMessages })
     }
   })
   .catch(err => console.log(err))
@@ -45,6 +68,7 @@ router.post('/register', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '您已成功登出！')
   res.redirect('/users/login')  
 })
 
