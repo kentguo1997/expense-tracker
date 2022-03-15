@@ -9,13 +9,14 @@ const records = require('./modules/records')
 const categories = require('./modules/categories')
 const methods = require('./modules/methods')
 const users = require('./modules/users')
+const { authenticator } = require('../middleware/auth')
 
 // using router
-router.use('/records', records)
-router.use('/categories', categories)
-router.use('/methods', methods)
+router.use('/records', authenticator, records)
+router.use('/categories', authenticator, categories)
+router.use('/methods', authenticator, methods)
 router.use('/users', users)
-router.use('/', home)
+router.use('/', authenticator, home)
 
 
 
