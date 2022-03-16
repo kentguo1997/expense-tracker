@@ -1,42 +1,62 @@
 // Include config/mongoose.js
 const db = require('../../config/mongoose')
 
-// Include category model
-const Category = require('../category')
+// Include bcryptjs
+const bcrypt = require('bcryptjs')
 
-// define category seed data
-const categories = [
+// Include category & User model
+const Category = require('../category')
+const User = require('../user')
+
+// define category & user seed data
+const seedCategories = [
   { 
-    name: '家居物業',
-    icon: 'fa-solid fa-house'
+    categoryName: '家居物業',
+    categoryIcon: 'fa-solid fa-house'
    },
   {
-    name: '交通出行',
-    icon: 'fa-solid fa-van-shuttle'       
+    categoryName: '交通出行',
+    categoryIcon: 'fa-solid fa-van-shuttle'       
   },
   {
-    name: '休閒娛樂',
-    icon: 'fa-solid fa-face-grin-beam'  
+    categoryName: '休閒娛樂',
+    categoryIcon: 'fa-solid fa-face-grin-beam'  
   }, 
   {
-    name: '餐飲食品',
-    icon: 'fa-solid fa-utensils'   
+    categoryName: '餐飲食品',
+    categoryIcon: 'fa-solid fa-utensils'   
   },
   {
-    name: '其他',
-    icon: 'fa-solid fa-pen'
+    categoryName: '其他',
+    categoryIcon: 'fa-solid fa-pen'
   }
 ]
 
+const seedUsers = [{
+  name: '小明',
+  email: 'user1@example.com',
+  password: '12345678'
+}]
+
 
 db.once('open', () => {
-  Promise.all(Array.from(categories, category => {
-    return Category.create({
-      categoryName: category.name,
-      categoryIcon: category.icon
-    })
+  Promise.all(Array.from(seedUsers, seedUser => {
+    return bcrypt.genSalt(10)
+      .then(salt => bcrypt.hash(seedUser.password, salt))
+      .then(hash => User.create({
+        name: seedUser.name,
+        email: seedUser.email,
+        password: hash
+      }))
+      .then(user => {
+        const userId = user._id
+        seedCategories.forEach(seedCategory => {
+          seedCategory.userId = userId
+        })
+        return Category.create(seedCategories)
+      })
   })).then(() => {
     console.log('done')
-    process.exit() 
+    process.exit()
   })
 })

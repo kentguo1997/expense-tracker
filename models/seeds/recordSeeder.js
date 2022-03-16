@@ -1,13 +1,16 @@
 // Include config/mongoose.js
 const db = require('../../config/mongoose')
 
-// Include record & category model
+
+// Include models
 const Record = require('../record')
 const Category = require('../category')
 const User = require('../user')
+const category = require('../category')
 
-// define record & seed data
-const records = [
+
+// define record & user seed data
+const seedRecords = [
   {
     name: '房租',
     date: '2022-03-08',
@@ -45,49 +48,35 @@ const records = [
   }
 ]
 
-const users = [
-  {
-    name: '小明',
-    email: 'user1@example.com',
-    password: '12345678',
-    writtenRecords: records.slice(2)
-  },
-  {
-    name: '小花',
-    email: 'user2@example.com',
-    password: '12345678',
-    writtenRecords: records.slice(0, 2)
-  }
-]
+const seedUsers = [{
+  name: '小明',
+  email: 'user1@example.com',
+  password: '12345678'
+}]
+
 
 // create data once db connected
 db.once('open', () => {
-  Promise.all(Array.from(users, seedUser => {
-    return User.create({
-      name: seedUser.name,
-      email: seedUser.email,
-      password: seedUser.password
-    }) .then(user => {
-      const userId = user._id
-      seedUser.writtenRecords.forEach(writtenRecord => {
-        Category.findOne({ categoryName: writtenRecord.categoryName })
-          .then(category => {
-            const categoryId = category._id
-            const categoryIcon = category.categoryIcon
-            Record.create({
-              name: writtenRecord.name,
-              date: writtenRecord.date,
-              amount: writtenRecord.amount,
-              method: writtenRecord.method,
-              categoryId,
-              categoryIcon,
-              userId
-            })
-          })  
-      }) 
+
+  User.findOne({ email: seedUsers[0].email })
+  .then(user => {
+    const userId = user._id
+    
+    Promise.all(Array.from(seedRecords, seedRecord => {
+      return Category.findOne({ categoryName: seedRecord.categoryName, userId })
+      .then(category => {
+        seedRecord.categoryId = category._id
+        seedRecord.categoryIcon = category.categoryIcon
+        seedRecord.userId = userId
+        delete seedRecord.categoryName
+
+        Record.create(seedRecord)
+      })
+    })).then(() => {
+      console.log('done')
+      
     })
-  })).then(() => {
-    console.log('done') 
   })
+  .catch(err => console.log(err))
 })
 
