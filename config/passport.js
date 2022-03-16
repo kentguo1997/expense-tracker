@@ -1,4 +1,5 @@
 // Include passport & passport strategy
+const bcrypt = require('bcryptjs/dist/bcrypt')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
@@ -19,10 +20,13 @@ module.exports = app => {
         if (!user) {
           return done(null, false, req.flash('loginError', '找不到這個使用者！'))
         }
-        if (user.password !== password) {
-          return done(null, false, req.flash('loginError', '信箱或密碼輸入錯誤！'))
-        }
-        return done(null, user)
+        return bcrypt.compare(password, user.password)
+          .then(isMatch =>{
+            if(!isMatch){
+              return done(null, false, req.flash('loginError', '信箱或密碼輸入錯誤！'))
+            }
+            return done(null, user)
+          })
       })
       .catch(error => done(err, false))
   }))

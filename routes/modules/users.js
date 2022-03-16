@@ -8,6 +8,10 @@ const passport = require('passport')
 // Include User Model
 const User = require('../../models/user')
 
+// Include bcryptjs
+const bcrypt = require('bcryptjs')
+
+
 // setting('/users')
 router.get('/login', (req, res) => {
   res.render('login')
@@ -48,16 +52,21 @@ router.post('/register', (req, res) => {
   User.findOne({ email })
   .then(user => {
     if(!user) {
-      User.create({
-        name,
-        email,
-        password
-      })
-      .then(() => {
-        req.flash('successRegister', '註冊成功! 請登入!')
-        res.redirect('/users/login')
-      })
-      .catch(err => console.log(err))
+      bcrypt
+      .genSalt(10)
+      .then(salt => bcrypt.hash(password, salt))
+      .then(hash => {
+        User.create({
+          name,
+          email,
+          password: hash
+        })
+        .then(() => {
+          req.flash('successRegister', '註冊成功! 請登入!')
+          res.redirect('/users/login')
+        })
+        .catch(err => console.log(err))
+      })    
     } else {
       errorMessages.push({ message: '此信箱已經註冊過了！' })
       res.render('register', { name, email, password, confirmPassword, errorMessages })
