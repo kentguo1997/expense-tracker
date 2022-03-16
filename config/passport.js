@@ -1,10 +1,14 @@
 // Include passport & passport strategy
-const bcrypt = require('bcryptjs/dist/bcrypt')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const FacebookStrategy = require('passport-facebook').Strategy
+
+// Include bryptjs
+const bcrypt = require('bcryptjs')
 
 // Include User Model
 const User = require('../models/user')
+
 
 // export as a function for controller to use
 module.exports = app => {
@@ -30,6 +34,35 @@ module.exports = app => {
       })
       .catch(error => done(err, false))
   }))
+
+
+  // facebook login strategy
+  passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK,
+    profileFields: ['email', 'displayName']
+  }, (accessToken, refreshToken, profile, done) => {  
+    const {email, name} = profile._json
+    
+    User.findOne({ email })
+    .then(user => {
+      if(user) return done(null, user)
+
+      const randomPassword = Math.random().toString(36).slice(-8)
+      bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(randomPassword, salt))
+        .then(hash => User.create({
+          email,
+          name,
+          password: hash
+        }))
+      .then(user => done(null, user))
+      .catch(err => console.log(err))
+    })  
+  }
+  ));
 
   
   // serialization & deserialization
