@@ -9,6 +9,7 @@ const Category = require('../../models/category')
 // setting ('/' HomePage)
 router.get('/', (req, res) => {
   const userId = req.user._id
+  const recordMonths = []
   let totalAmount = 0
 
 
@@ -16,10 +17,16 @@ router.get('/', (req, res) => {
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      records.forEach(record => totalAmount += record.amount)
+      records.forEach(record => {
+        totalAmount += record.amount
+        const recordMonth = record.date.slice(0, 7)
+        if (!recordMonths.includes(recordMonth)) {
+          recordMonths.push(recordMonth)
+        }
+      })
       Category.find({ userId })
       .lean()
-      .then(categories => res.render('index', { records, totalAmount, categories }))
+      .then(categories => res.render('index', { records, totalAmount, categories, recordMonths }))
     })
     .catch(error => console.log(error))
 })

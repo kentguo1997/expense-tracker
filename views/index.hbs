@@ -3,21 +3,40 @@
     <div class="card card-body">
       <!-- 快捷鍵 -->
       <div class="container d-flex justify-content-between">
-        <!-- 類別 / 方式篩選  -->
-        <div class="dropdown col d-grid gap-2" style="max-width:fit-content;">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            支出類別/方式
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {{#each categories}}
-            <li><a class="dropdown-item" href="/categories/{{this._id}}">{{this.categoryName}}</a></li>
-            {{/each}}
-            <li><a class="dropdown-item" href="/methods/cash">現金支付</a></li>
-            <li><a class="dropdown-item" href="/methods/card">信用卡支付</a></li>
-            <li><a class="dropdown-item" href="/methods/mobile">行動支付</a></li>
-          </ul>
+        
+        <div class="wrap">
+          <!-- 類別 / 方式篩選  -->
+          <div class="dropdown col d-grid gap-2 mb-2" style="max-width:fit-content;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              支出類別/方式
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {{#each categories}}
+              <li><a class="dropdown-item" href="/categories/{{this._id}}">{{this.categoryName}}</a></li>
+              {{/each}}
+              <li><a class="dropdown-item" href="/methods/cash">現金支付</a></li>
+              <li><a class="dropdown-item" href="/methods/card">信用卡支付</a></li>
+              <li><a class="dropdown-item" href="/methods/mobile">行動支付</a></li>
+            </ul>
+          </div>
+          <!-- 月份篩選 -->
+          <div class="dropdown col d-grid gap-2 mt-3" style="max-width:fit-content;">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              支出月份
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {{#each recordMonths}}
+              <li><a class="dropdown-item" href="/date/{{this}}">{{this}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
         </div>
+        
+        
+        
+
         <!-- 新增類別 -->
         <div class="d-flex justify-content-center align-items-center">
           <a href="/categories/new" class="btn btn-dark">新增類別</a>
