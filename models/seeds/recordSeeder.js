@@ -56,27 +56,27 @@ const seedUsers = [{
 
 
 // create data once db connected
-db.once('open', () => {
-
-  User.findOne({ email: seedUsers[0].email })
-  .then(user => {
-    const userId = user._id
+db.once('open', async() => {
+  await Promise.all(Array.from(seedRecords, async (seedRecord) => {
     
-    Promise.all(Array.from(seedRecords, seedRecord => {
-      return Category.findOne({ categoryName: seedRecord.categoryName, userId })
-      .then(category => {
-        seedRecord.categoryId = category._id
-        seedRecord.categoryIcon = category.categoryIcon
-        seedRecord.userId = userId
-        delete seedRecord.categoryName
-
-        Record.create(seedRecord)
-      })
-    })).then(() => {
-      console.log('done')
-      
-    })
-  })
-  .catch(err => console.log(err))
+    const user = await User.findOne({ email: seedUsers[0].email })
+    const userId = user._id
+    const updatedRecords = []
+    
+    const category = await Category.findOne({ categoryName: seedRecord.categoryName, userId })
+    
+    seedRecord.categoryId = category._id
+    seedRecord.categoryIcon = category.categoryIcon
+    seedRecord.userId = userId
+    delete seedRecord.categoryName
+    updatedRecords.push(seedRecord)
+        
+    await Record.create(updatedRecords)
+    
+  }))
+    
+  console.log('done')
+  process.exit()
+  
 })
 
