@@ -77,23 +77,23 @@ router.put('/:id', (req, res) => {
     .then(category => {
       categoryId = category._id
       categoryIcon = category.categoryIcon
+
+      Record.findOne({ _id: recordId, userId })
+        .then(record => {
+          record.name = name
+          record.date = date
+          record.amount = amount
+          record.method = method
+          record.categoryId = categoryId
+          record.categoryIcon = categoryIcon
+          record.userId = userId
+
+          record.save()
+        })
+        .then(() => res.redirect('/'))
     })
     .catch(err => console.log(err))
 
-  Record.findOne({ _id: recordId, userId })
-    .then(record => {
-      record.name = name
-      record.date = date
-      record.amount = amount
-      record.method = method
-      record.categoryId = categoryId
-      record.categoryIcon = categoryIcon
-      record.userId = userId
-
-      record.save()
-    })
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
 })
 
 // Delete Record
