@@ -1,13 +1,10 @@
 // Include config/mongoose.js
 const db = require('../../config/mongoose')
 
-
 // Include models
 const Record = require('../record')
 const Category = require('../category')
 const User = require('../user')
-const category = require('../category')
-
 
 // define record & user seed data
 const seedRecords = [
@@ -54,29 +51,24 @@ const seedUsers = [{
   password: '12345678'
 }]
 
-
 // create data once db connected
-db.once('open', async() => {
+db.once('open', async () => {
   await Promise.all(Array.from(seedRecords, async (seedRecord) => {
-    
     const user = await User.findOne({ email: seedUsers[0].email })
     const userId = user._id
     const updatedRecords = []
-    
+
     const category = await Category.findOne({ categoryName: seedRecord.categoryName, userId })
-    
+
     seedRecord.categoryId = category._id
     seedRecord.categoryIcon = category.categoryIcon
     seedRecord.userId = userId
     delete seedRecord.categoryName
     updatedRecords.push(seedRecord)
-        
+
     await Record.create(updatedRecords)
-    
   }))
-    
+
   console.log('done')
   process.exit()
-  
 })
-

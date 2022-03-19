@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
   const recordMonths = []
   let totalAmount = 0
 
-
   Record.find({ userId })
     .lean()
     .sort({ date: 'asc' })
@@ -25,13 +24,11 @@ router.get('/', (req, res) => {
         }
       })
       Category.find({ userId })
-      .lean()
-      .then(categories => res.render('index', { records, totalAmount, categories, recordMonths }))
+        .lean()
+        .then(categories => res.render('index', { records, totalAmount, categories, recordMonths }))
     })
     .catch(error => console.log(error))
 })
-
-
 
 // export router for index.js
 module.exports = router

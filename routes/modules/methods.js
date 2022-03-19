@@ -2,11 +2,9 @@
 const express = require('express')
 const router = express.Router()
 
-
 // Include Models
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-
 
 // setting ('/methods')
 router.get('/cash', (req, res) => {
@@ -14,7 +12,7 @@ router.get('/cash', (req, res) => {
   const records = []
   const recordMonths = []
   let totalAmount = 0
-  
+
   Record.find({ userId })
     .lean()
     .sort({ date: 'asc' })
@@ -37,7 +35,6 @@ router.get('/cash', (req, res) => {
     })
     .catch(err => console.log(err))
 })
-
 
 router.get('/card', (req, res) => {
   const userId = req.user._id
@@ -68,7 +65,6 @@ router.get('/card', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
 router.get('/mobile', (req, res) => {
   const userId = req.user._id
   const records = []
@@ -97,8 +93,6 @@ router.get('/mobile', (req, res) => {
     })
     .catch(err => console.log(err))
 })
-
-
 
 // export router for index.js
 module.exports = router

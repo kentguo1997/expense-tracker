@@ -6,7 +6,7 @@ const router = express.Router()
 const passport = require('passport')
 
 // setting('/auth')
-// button for sending request 
+// button for sending request
 router.get('/facebook', passport.authenticate('facebook', {
   scope: ['email', 'public_profile']
 }))
@@ -16,8 +16,6 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
-
-
 
 // export router for index.js
 module.exports = router

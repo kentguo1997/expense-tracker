@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const category = require('./category')
 const Schema = mongoose.Schema
 
 // Include Models
@@ -13,12 +12,12 @@ const recordSchema = new Schema({
   },
   date: {
     type: String,
-    required: true 
-  }, 
+    required: true
+  },
   amount: {
     type: Number,
     required: true
-  }, 
+  },
   method: {
     type: String,
     required: true

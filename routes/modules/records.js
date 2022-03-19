@@ -6,16 +6,15 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
-
 // setting ('/records')
 // Adding new record
 router.get('/new', (req, res) => {
   const userId = req.user._id
 
   Category.find({ userId })
-  .lean()
-  .then(categories => res.render('new', { categories }) )
-  .catch(err => console.log(err))
+    .lean()
+    .then(categories => res.render('new', { categories }))
+    .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
@@ -45,18 +44,17 @@ router.post('/', (req, res) => {
         categoryIcon,
         userId
       })
-      .then(() => res.redirect('/'))
-      .catch(err => console.log(err))
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
     })
 })
-
 
 // Edit record
 router.get('/:id/edit', (req, res) => {
   const recordId = req.params.id
   const userId = req.user._id
 
-  Record.findOne({ _id: recordId, userId})
+  Record.findOne({ _id: recordId, userId })
     .lean()
     .then(record => {
       const { name, date, amount, method, categoryId } = record
@@ -68,7 +66,6 @@ router.get('/:id/edit', (req, res) => {
     })
     .catch(err => console.log(err))
 })
-
 
 router.put('/:id', (req, res) => {
   const recordId = req.params.id
@@ -83,8 +80,7 @@ router.put('/:id', (req, res) => {
     })
     .catch(err => console.log(err))
 
-
-  Record.findOne({ _id: recordId, userId})
+  Record.findOne({ _id: recordId, userId })
     .then(record => {
       record.name = name
       record.date = date
@@ -100,7 +96,6 @@ router.put('/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
 // Delete Record
 router.delete('/:id', (req, res) => {
   const recordId = req.params.id
@@ -111,7 +106,6 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
-
 
 // export router for index.js
 module.exports = router

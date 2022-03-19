@@ -2,7 +2,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 // Include Modules
 const home = require('./modules/home')
 const records = require('./modules/records')
@@ -21,8 +20,6 @@ router.use('/methods', authenticator, methods)
 router.use('/users', users)
 router.use('/auth', auth)
 router.use('/', authenticator, home)
-
-
 
 // export router for controller to use
 module.exports = router

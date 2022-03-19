@@ -10,21 +10,21 @@ const User = require('../user')
 
 // define category & user seed data
 const seedCategories = [
-  { 
+  {
     categoryName: '家居物業',
     categoryIcon: 'fa-solid fa-house'
-   },
+  },
   {
     categoryName: '交通出行',
-    categoryIcon: 'fa-solid fa-van-shuttle'       
+    categoryIcon: 'fa-solid fa-van-shuttle'
   },
   {
     categoryName: '休閒娛樂',
-    categoryIcon: 'fa-solid fa-face-grin-beam'  
-  }, 
+    categoryIcon: 'fa-solid fa-face-grin-beam'
+  },
   {
     categoryName: '餐飲食品',
-    categoryIcon: 'fa-solid fa-utensils'   
+    categoryIcon: 'fa-solid fa-utensils'
   },
   {
     categoryName: '其他',
@@ -37,7 +37,6 @@ const seedUsers = [{
   email: 'user1@example.com',
   password: '12345678'
 }]
-
 
 db.once('open', () => {
   Promise.all(Array.from(seedUsers, seedUser => {
