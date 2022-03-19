@@ -17,6 +17,11 @@ router.post('/', (req, res ) => {
   const { categoryIcon, categoryName } = req.body
   const userId = req.user._id
 
+  if (!categoryIcon || !categoryName) {
+    req.flash('blankErr', '請完成填寫表格！')
+    return res.redirect('/categories/new')
+  }
+
   Category.create({
     categoryName,
     categoryIcon,

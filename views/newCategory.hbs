@@ -3,11 +3,11 @@
   <form action="/categories" method="POST">
     <mark class="mt-4 mb-3 p-3 text-center"
       style="display: block; font-size: 40px; font-weight: bolder; border-radius: 100px;">新增支出類別</mark>
-
+    {{> message}}
     <!--Category Name -->
     <div class="wrap">
       <span class="required mx-2" style="color: red;">*</span>
-      <input type="text" placeholder="請輸入支出類別" class="mt-4 mb-2" name="categoryName" size="50"
+      <input type="text" placeholder="請輸入支出類別的名稱" class="mt-4 mb-2" name="categoryName" size="50"
         style=" padding:5px 15px; background:#D8FFDB; border:0 none;cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
     </div>
     
@@ -17,27 +17,72 @@
       <span class="required mx-2" style="color: red;">*</span>
       <div class="wrap" style="padding:5px 15px; background:#D8FFDB; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px;">
           <span>選擇類別圖示:</span>
-          <div class="wrap">
-            <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-shirt" checked><i
-                class="fa-solid fa-shirt fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-book"><i
-                class="fa-solid fa-book fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-briefcase-medical"><i
-                class="fa-solid fa-briefcase-medical fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-plane"><i
-                class="fa-solid fa-plane fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-bag-shopping"><i
-                class="fa-solid fa-bag-shopping fa-lg mx-1"></i></label><br>
-            <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-piggy-bank"><i
-                class="fa-solid fa-piggy-bank fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-laptop"><i
-                class="fa-solid fa-laptop fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-child"><i
-                class="fa-solid fa-child fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-person-biking"><i
-                class="fa-solid fa-person-biking fa-lg mx-1"></i></label>
-            <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-gift"><i
-                class="fa-solid fa-gift fa-lg mx-1"></i></label>
+          <div class="d-flex flex-column mt-1">
+            <div class="wrap mb-1">
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-house"><i
+                  class="fa-solid fa-house fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-van-shuttle"><i
+                  class="fa-solid fa-van-shuttle fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-face-grin-beam"><i
+                  class="fa-solid fa-face-grin-beam fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-utensils"><i
+                  class="fa-solid fa-utensils fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-pen"><i
+                  class="fa-solid fa-pen fa-lg mx-1"></i></label>
+            </div>
+            
+            <div class="wrap mb-1">
+              <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-shirt"><i
+                  class="fa-solid fa-shirt fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-book"><i
+                  class="fa-solid fa-book fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-briefcase-medical"><i
+                  class="fa-solid fa-briefcase-medical fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-plane"><i
+                  class="fa-solid fa-plane fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-bag-shopping"><i
+                  class="fa-solid fa-bag-shopping fa-lg mx-1"></i></label>
+            </div>
+            
+            <div class="wrap mb-1">
+              <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-piggy-bank"><i
+                  class="fa-solid fa-piggy-bank fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-laptop"><i
+                  class="fa-solid fa-laptop fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-child"><i
+                  class="fa-solid fa-child fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-car"><i
+                  class="fa-solid fa-car fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-gift"><i
+                  class="fa-solid fa-gift fa-lg mx-1"></i></label>
+            </div>
+            
+            <div class="wrap mb-1">
+              <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-basketball"><i
+                  class="fa-solid fa-basketball fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-user-group"><i
+                  class="fa-solid fa-user-group fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-wine-glass"><i
+                  class="fa-solid fa-wine-glass fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-building-columns"><i
+                  class="fa-solid fa-building-columns fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-camera"><i
+                  class="fa-solid fa-camera fa-lg mx-1"></i></label>
+            </div>
+
+            <div class="wrap mb-1">
+              <label class="mx-2 mt-2"><input type="radio" name="categoryIcon" value="fa-solid fa-coins"><i
+                  class="fa-solid fa-coins fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-cat"><i
+                  class="fa-solid fa-cat fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-gamepad"><i
+                  class="fa-solid fa-gamepad fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-mobile"><i
+                  class="fa-solid fa-mobile fa-lg mx-1"></i></label>
+              <label class="mx-2"><input type="radio" name="categoryIcon" value="fa-solid fa-heart"><i
+                  class="fa-solid fa-heart fa-lg mx-1"></i></label>
+            </div>
+            
           </div>  
       </div>
     </div>
