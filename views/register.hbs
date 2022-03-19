@@ -1,35 +1,35 @@
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mt-3">Register</h1>
+      <h1 class="text-center mt-3">註冊帳號</h1>
       {{> message}}
       <form action="/users/register" method="POST">
         <div class="form-group mt-3 mb-2">
-          <span class="required mx-1" style="color: red;">*</span><label for="name">Name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Kent Guo" value="{{name}}">
+          <span class="required mx-1" style="color: red;">*</span><label for="name">使用者名稱</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="例如: 王小明" value="{{name}}">
         </div>
         <div class="form-group mt-3 mb-2">
-          <span class="required mx-1" style="color: red;">*</span><label for="email">Email</label>
+          <span class="required mx-1" style="color: red;">*</span><label for="email">電子郵件地址</label>
           <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com"
             value="{{email}}">
         </div>
         <div class="form-group mt-3 mb-2">
-          <span class="required mx-1" style="color: red;">*</span><label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+          <span class="required mx-1" style="color: red;">*</span><label for="password">密碼</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="任意英數字文字或符號"
             value="{{password}}">
         </div>
         <div class="form-group mt-3 mb-2">
-          <span class="required mx-1" style="color: red;">*</span><label for="confirmPassword">Confirm Password</label>
+          <span class="required mx-1" style="color: red;">*</span><label for="confirmPassword">確認密碼</label>
           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-            placeholder="Confirm Password" value="{{confirmPassword}}">
+            placeholder="再次輸入您的密碼" value="{{confirmPassword}}">
         </div>
         <div class="register-btn text-center mt-3">
-          <button type="submit" class="form-control btn btn-primary mb-2">Register</button>
-          <a href="/auth/facebook" class="form-control btn btn-info btn-block">Facebook Login</a>
+          <button type="submit" class="form-control btn btn-primary mb-2">註冊</button>
+          <a href="/auth/facebook" class="form-control btn btn-info btn-block">透過Facebook登入</a>
         </div>
       </form>
       <p class="lead mt-4">
-        Have an Account? <a href="/users/login">Login</a>
+        已經擁有帳號？ <a href="/users/login">登入帳號</a>
       </p>
     </div>
   </div>

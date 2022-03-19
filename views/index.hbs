@@ -1,48 +1,47 @@
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <!-- 快捷鍵 -->
-      <div class="container d-flex justify-content-between">
-        
-        <div class="wrap">
-          <!-- 類別 / 方式篩選  -->
-          <div class="dropdown col d-grid gap-2 mb-2" style="max-width:fit-content;">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              支出類別/方式
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {{#each categories}}
-              <li><a class="dropdown-item" href="/categories/{{this._id}}">{{this.categoryName}}</a></li>
-              {{/each}}
-              <li><a class="dropdown-item" href="/methods/cash">現金支付</a></li>
-              <li><a class="dropdown-item" href="/methods/card">信用卡支付</a></li>
-              <li><a class="dropdown-item" href="/methods/mobile">行動支付</a></li>
-            </ul>
-          </div>
-          <!-- 月份篩選 -->
-          <div class="dropdown col d-grid gap-2 mt-3" style="max-width:fit-content;">
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              支出月份
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {{#each recordMonths}}
-              <li><a class="dropdown-item" href="/date/{{this}}">{{this}}</a></li>
-              {{/each}}
-            </ul>
-          </div>
+   
+    <!-- 功能鍵 -->
+    <div class="container d-flex justify-content-between p-2">
+      <!-- 類別 / 方式篩選  -->
+      <div class="d-flex">
+        <div class="dropdown col d-grid gap-2 mx-2" style="max-width:fit-content;">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            支出類別/方式
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {{#each categories}}
+            <li><a class="dropdown-item" href="/categories/{{this._id}}">{{this.categoryName}}</a></li>
+            {{/each}}
+            <li><a class="dropdown-item" href="/methods/cash">現金支付</a></li>
+            <li><a class="dropdown-item" href="/methods/card">信用卡支付</a></li>
+            <li><a class="dropdown-item" href="/methods/mobile">行動支付</a></li>
+          </ul>
         </div>
-        
-        
-        
-
         <!-- 新增類別 -->
         <div class="d-flex justify-content-center align-items-center">
-          <a href="/categories/new" class="btn btn-dark">新增類別</a>
+          <a href="/categories/new" class="btn btn-outline-secondary">新增類別</a>
         </div>
       </div>
-      
+
+      <!-- 月份篩選 -->
+      <div class="dropdown col d-grid gap-2" style="max-width:fit-content;">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          支出月份
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          {{#each recordMonths}}
+          <li><a class="dropdown-item" href="/date/{{this}}">{{this}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="card card-body">
       <!--顯示花費金額-->
       <div class="total-expenses d-flex justify-content-center align-items-center mt-3">
         <h3 class="text-center mx-3 ">累計花費:</h3>
@@ -72,9 +71,9 @@
                 <h3>{{this.amount}}</h3>
               </div>
               <!-- 編輯和刪除按鈕 -->
-              <a class="btn btn-success mx-2" href="/records/{{this._id}}/edit">Edit</a>
+              <a class="btn btn-success mx-2" href="/records/{{this._id}}/edit">編輯</a>
               <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;">
-                <button class="btn btn-danger" type="submit">Delete</button>
+                <button class="btn btn-danger" type="submit">刪除</button>
               </form>
             </div>
           </div>
